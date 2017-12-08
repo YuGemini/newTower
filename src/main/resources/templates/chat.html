@@ -1,0 +1,205 @@
+﻿
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<title>China Tower Chat</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" type="image/x-icon" href="../mystatic/img/cnmini.ico" media="screen" />
+    <!-- bootstrap -->
+    <link href="../mystatic/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../mystatic/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+
+    <!-- libraries -->
+    <link href="../mystatic/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../mystatic/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/elements.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/icons.css" />
+
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="../mystatic/css/compiled/index.css" type="text/css" media="screen" />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- navbar -->
+    <header class="navbar navbar-inverse" role="banner">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">CHINA <span style="color:red">T</span>OWER</a>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+            <li class="hidden-xs hidden-sm">
+                <input class="search" type="text" />
+            </li>
+           
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    <shiro:principal/>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="personal-info.html">个人信息</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li><a href="loginout">退出登入</a></li>
+                    
+                </ul>
+            </li>
+            
+            <li class="settings hidden-xs hidden-sm">
+                <a href="#" onclick="JavaScript:history.back(-1);" role="button">
+                    <i class="icon-share-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <!-- end navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="index">
+                    <i class="icon-home"></i>
+                    <span>首页</span>
+                </a>  
+                    
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>铁塔信息表</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="towerlist">铁塔信息列表</a></li>
+                    <li><a href="addtower">添加数据</a></li>
+                    <li><a href="uploadtower">上传数据</a></li>
+                </ul>
+            </li>            
+            <li>
+            	<div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="">
+                    <i class="icon-group"></i>
+                    <span>聊天室</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>用户</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="user-list.html">用户列表</a></li>
+                    <li><a href="new-user.html">新用户</a></li>
+                    <li><a href="user-profile.html">用户资料</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-edit"></i>
+                    <span>表单</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="form-showcase.html">表单应用</a></li>
+                    <li><a href="form-wizard.html">表单验证</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="gallery.html">
+                    <i class="icon-picture"></i>
+                    <span>相册</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="icon-calendar-empty"></i>
+                    <span>日历</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>表格</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="tables.html">常用表格</a></li>
+                    <li><a href="datatables.html">数据表格</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle ui-elements" href="#">
+                    <i class="icon-code-fork"></i>
+                    <span>UI 组件</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="ui-elements.html">UI 组件</a></li>
+                    <li><a href="icons.html">Icons图标</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>我的信息</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>其他</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="code-editor.html">代码编辑器</a></li>
+                    <li><a href="grids.html">网格</a></li>
+                    <li><a href="signin.html">登录</a></li>
+                    <li><a href="signup.html">注册</a></li>
+                </ul>
+            </li> -->
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+	<!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">默认皮肤</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="../mystatic/css/compiled/skins/dark.css">
+                <span class="icon"></span><span class="text">深色皮肤</span>
+            </a>
+        </div>
+        
+    </div>
+
+
+	<!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../mystatic/js/bootstrap.min.js"></script>
+    <script src="../mystatic/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <!-- flot charts -->
+    <script src="../mystatic/js/theme.js"></script>
+
+    
+</body>
+</html>

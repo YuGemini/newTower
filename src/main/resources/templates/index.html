@@ -1,0 +1,228 @@
+﻿
+<!DOCTYPE html>
+<html xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+	<title>China Tower Index</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" type="image/x-icon" href="../mystatic/img/cnmini.ico" media="screen" />
+    <!-- bootstrap -->
+    <link href="../mystatic/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../mystatic/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+
+    <!-- libraries -->
+    <link href="../mystatic/css/lib/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />
+    <link href="../mystatic/css/lib/font-awesome.css" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/elements.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/icons.css" />
+
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="../mystatic/css/compiled/index.css" type="text/css" media="screen" />
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- navbar -->
+    <header class="navbar navbar-inverse" role="banner">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">CHINA <span style="color:red">T</span>OWER</a>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+            <li class="hidden-xs hidden-sm">
+                <input class="search" type="text" />
+            </li>
+           
+            
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    <shiro:principal/>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="personal-info.html">个人信息</a></li>
+                    <li><a href="#">账号设置</a></li>
+                    <li><a href="loginout">退出登入</a></li>
+                    
+                </ul>
+            </li>
+            
+            <li class="settings hidden-xs hidden-sm">
+                <a href="#" onclick="JavaScript:history.back(-1);" role="button">
+                    <i class="icon-share-alt"></i>
+                </a>
+            </li>
+        </ul>
+    </header>
+    <!-- end navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-nav">
+        <ul id="dashboard-menu">
+            <li class="active">
+                <div class="pointer">
+                    <div class="arrow"></div>
+                    <div class="arrow_border"></div>
+                </div>
+                <a href="index">
+                    <i class="icon-home"></i>
+                    <span>首页</span>
+                </a>  
+                    
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>铁塔信息表</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="towerlist">铁塔信息列表</a></li>
+                    <li><a href="addtower">添加数据</a></li>
+                    <li><a href="uploadtower">上传数据</a></li>
+                </ul>
+            </li>            
+            <li>
+                <a href="">
+                    <i class="icon-group"></i>
+                    <span>聊天室</span>
+                </a>
+            </li>
+            <!-- <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-group"></i>
+                    <span>用户</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="user-list.html">用户列表</a></li>
+                    <li><a href="new-user.html">新用户</a></li>
+                    <li><a href="user-profile.html">用户资料</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-edit"></i>
+                    <span>表单</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="form-showcase.html">表单应用</a></li>
+                    <li><a href="form-wizard.html">表单验证</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="gallery.html">
+                    <i class="icon-picture"></i>
+                    <span>相册</span>
+                </a>
+            </li>
+            <li>
+                <a href="calendar.html">
+                    <i class="icon-calendar-empty"></i>
+                    <span>日历</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="tables.html">
+                    <i class="icon-th-large"></i>
+                    <span>表格</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="tables.html">常用表格</a></li>
+                    <li><a href="datatables.html">数据表格</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle ui-elements" href="#">
+                    <i class="icon-code-fork"></i>
+                    <span>UI 组件</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="ui-elements.html">UI 组件</a></li>
+                    <li><a href="icons.html">Icons图标</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="personal-info.html">
+                    <i class="icon-cog"></i>
+                    <span>我的信息</span>
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-share-alt"></i>
+                    <span>其他</span>
+                    <i class="icon-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="code-editor.html">代码编辑器</a></li>
+                    <li><a href="grids.html">网格</a></li>
+                    <li><a href="signin.html">登录</a></li>
+                    <li><a href="signup.html">注册</a></li>
+                </ul>
+            </li> -->
+        </ul>
+    </div>
+    <!-- end sidebar -->
+
+
+	<!-- main container -->
+    <div class="content">
+	<!-- settings changer -->
+        <div class="skins-nav">
+            <a href="#" class="skin first_nav selected">
+                <span class="icon"></span><span class="text">默认皮肤</span>
+            </a>
+            <a href="#" class="skin second_nav" data-file="../mystatic/css/compiled/skins/dark.css">
+                <span class="icon"></span><span class="text">深色皮肤</span>
+            </a>
+        </div>
+        
+        <div>
+   	<h1 style="margin-top:15px">&nbsp;&nbsp;公司简介</h1>
+	<div class="gyttrb" style=" min-height: 510px; font-family:SimSun;background: #f8f8f8;padding: 25px 40px;margin-top: 20px;">
+   <p class="text-left lead" style="text-indent:2em;">中国铁塔是经国务院批准，国资委、工信部协调推动，由中国电信、中国移动、中国联通共同出资设立的大型通信基础设施综合服务企业，主要从事通信铁塔等基站配套设施和室内分布系统的建设、维护和运营。公司于2014年7月18日挂牌成立，2015年10月与三家电信运营企业完成全部存量铁塔相关资产的注入和收购，同时引入新股东中国国新。截至目前，公司铁塔总量约170万座，成为全球最大的通信基础设施服务公司。根据公司“三步走”战略，公司将择机上市，并实现混合所有制发展。
+</p>
+   <p class="text-left lead"><strong>公司的企业精神：</strong>求是求实、自强不息</p>
+   <p class="text-left lead"><strong>公司的核心价值观：</strong>开拓创新、务实高效、利益客户、成就员工</p>
+   <p class="text-left lead"><strong>公司的企业使命：</strong>共享共赢，创效率效益型企业</p>
+   <p class="text-left lead"><strong>公司的企业愿景：</strong>做国际一流的信息通信基础设施服务商</p>
+   
+   
+   <!-- <div class="rmboximg rmboxa" style="height:180px">
+     <div class="scrollcontaine" style="width:430px;height:210px">
+      <ul style="width: 450px; left: 0px;">
+      <li style="height:180px;margin-right: 28px;"><a href="#" title="" class="col666"><img src="http://stcms.beisen.com/cmsportal/201172/201172_themes_tower_images_img4.jpg" alt=""><p style="width: 178px;margin-left: 10px;">浙江省李强省长和刘爱力董事长为浙江分公司成立揭牌</p></a></li>
+        <li style="height:180px"><a href="#" title="" class="col666"><img src="http://stcms.beisen.com/cmsportal/201172/201172_themes_tower_images_img5.jpg" alt=""><p style="width: 167px;margin-left: 13px;">何树山副市长和佟吉禄总经理为天津分公司成立揭牌</p></a></li>
+     </ul>
+    </div>
+   </div> -->
+</div>
+ </div>
+        
+    </div>
+
+
+	<!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../mystatic/js/bootstrap.min.js"></script>
+    <script src="../mystatic/js/jquery-ui-1.10.2.custom.min.js"></script>
+    <!-- knob -->
+    <script src="../mystatic/js/jquery.knob.js"></script>
+    <!-- flot charts -->
+    <!-- <script src="../mystatic/js/jquery.flot.js"></script>
+    <script src="../mystatic/js/jquery.flot.stack.js"></script>
+    <script src="../mystatic/js/jquery.flot.resize.js"></script> -->
+    <script src="../mystatic/js/theme.js"></script>
+
+    
+</body>
+</html>

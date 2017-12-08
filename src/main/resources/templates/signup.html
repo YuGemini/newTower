@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html class="login-bg">
+<head>
+	<title>China Tower Signup</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" type="image/x-icon" href="../mystatic/img/cnmini.ico" media="screen" />
+    <!-- bootstrap -->
+    <link href="../mystatic/css/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../mystatic/css/bootstrap/bootstrap-overrides.css" type="text/css" rel="stylesheet" />
+
+    <!-- global styles -->
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/layout.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/elements.css" />
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/compiled/icons.css" />
+
+    <!-- libraries -->
+    <link rel="stylesheet" type="text/css" href="../mystatic/css/lib/font-awesome.css" />
+    
+    <!-- this page specific styles -->
+    <link rel="stylesheet" href="../mystatic/css/compiled/signup.css" type="text/css" media="screen" />
+
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- scripts -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../mystatic/js/bootstrap.min.js"></script>
+    <script src="../mystatic/js/theme.js"></script>
+</head>
+<body>
+    <div class="header" style="background: rgba(18, 47, 74, 0.16);height: 85px">
+        <a href="index.html">
+            <img src="../mystatic/img/chinatowerbg.png" class="logo" style="margin-top:-40px"/>
+        </a>
+    </div>
+    <div class="login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+                <h6>Sign Up</h6>
+                <form id="sign">
+                <input class="form-control" type="text" placeholder="Username" name="username"/>
+                <input class="form-control" type="password" placeholder="Password" name="psd1"/>
+                <input class="form-control" type="password" placeholder="Confirm Password" name="psd2"/>
+                <div style="padding: 5px 0; text-align: center; color: red;"
+						id="showMsg"></div>
+                </form>
+                <div class="action">
+                    <a class="btn-glow primary signup" onclick="signUp()">Sign up</a>
+                </div>                
+            </div>
+        </div>
+
+        <div class="already">
+            <p>Already have an account?</p>
+            <a href="login">Sign in</a>
+        </div>
+    </div>
+	<script type="text/javascript">
+		function signUp(){
+			
+			$.ajax({
+				type : "POST", //post提交方式默认是get
+				url : "/signup",
+				data : $("#sign").serialize(), //序列化
+				success : function(data) {
+					
+					if (data.status == "1") {
+						$("#showMsg").html(data.msg);
+					} else {
+
+						document.location = "index";
+					}
+				
+					}
+				});
+		}
+	</script>
+	
+</body>
+</html>

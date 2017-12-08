@@ -1,0 +1,15 @@
+server:
+  contextPath: /vastio
+  port: 8080
+
+db:
+  url: jdbc:oracle:thin:@172.16.60.174:1521:orcl
+  userName: gray
+  passowrd: Peptalk123
+  driver: oracle.jdbc.driver.OracleDriver
+
+spring:
+  session:
+    store-type: HASH_MAP
+  cache:
+    type: None
