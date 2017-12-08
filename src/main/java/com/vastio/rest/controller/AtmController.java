@@ -127,6 +127,7 @@ public class AtmController {
         Double upkeepIncom = 0.0;
         Double upkeepExpend1 = 0.0;
         Double upkeepExpend2 = 0.0;
+        Double siteIncom = 0.0;
         for (Order order : orders) {
             if (order.getSiteId().equals(id)) {
                 ctName = order.getTowerName();
@@ -192,6 +193,11 @@ public class AtmController {
         stationInfo.setCt(ctName);
         stationInfo.setUpkeepIncom(String.valueOf(upkeepIncom / 12));
         stationInfo.setUpkeepExpend(String.valueOf((upkeepExpend1 + upkeepExpend2) / 12));
+        if(upkeepIncom/(upkeepExpend1 + upkeepExpend2)>1.15){
+            stationInfo.setUpkeepStatus("达标");
+        }else{
+            stationInfo.setUpkeepStatus("未达标");
+        }
     }
 
     @RequestMapping(value = "/station/export.action")
