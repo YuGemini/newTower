@@ -29,8 +29,8 @@ public class StationServiceImpl implements StationService {
 
     public Result findall(Map map) {
         PageQuery<StationInfo> query = new PageQuery<StationInfo>();
-        query.setPageNumber((Long) map.get("curRow"));
-        query.setPageSize((Long) map.get("pageSize"));
+        query.setPageNumber(((Number) map.get("curRow")).longValue());
+        query.setPageSize(((Number) map.get("pageSize")).longValue());
         query.setParas(map);
         query = sqlManager.pageQuery("site.findAll", StationInfo.class, query);
         Result result = new Result();
@@ -40,7 +40,7 @@ public class StationServiceImpl implements StationService {
     }
 
     public void insertStations(List<StationInfo> stationInfos) {
-        Map<String,Object> paras = new HashMap<String, Object>();
+        Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("stationInfos", stationInfos);
         sqlManager.update("site.insertStations", paras);
     }

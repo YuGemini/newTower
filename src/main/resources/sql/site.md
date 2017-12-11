@@ -5,16 +5,16 @@ findAll
 	* 
 	@} 
 	from site where 1=1  
-	@if(!isEmpty(id)){
+	@if(!isEmpty(id)&&id!=""){
 		and id like #'%'+id+'%'# 
 	@}
-	@if(!isEmpty(ct)){
+	@if(!isEmpty(ct)&&ct!=""){
 		and (ct like #'%'+ct+'%'# or cm like #'%'+ct+'%'# or cd like #'%'+ct+'%'# or cu like #'%'+ct+'%'#)  
 	@}
-	@if(!isEmpty(upkeepStatus)){
+	@if(!isEmpty(upkeepStatus)&&upkeepStatus!=""){
 		and upkeep_status = #upkeepStatus#
 	@}
-	@if(!isEmpty(siteStatus)){
+	@if(!isEmpty(siteStatus)&&siteStatus!=""){
 		and site_status = #siteStatus#
 	@}
 	

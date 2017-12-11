@@ -84,92 +84,9 @@
                 </a>
                 <ul class="active submenu">
                     <li><a href="towerlist" class="active">铁塔信息列表</a></li>
-                    <li><a href="addtower">添加数据</a></li>
                     <li><a href="uploadtower">上传数据</a></li>
                 </ul>
             </li>            
-            <!-- <li>
-                <a href="chart-showcase.html">
-                    <i class="icon-signal"></i>
-                    <span>图表</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>用户</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="user-list.html">用户列表</a></li>
-                    <li><a href="new-user.html">新用户</a></li>
-                    <li><a href="user-profile.html">用户资料</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-edit"></i>
-                    <span>表单</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="form-showcase.html">表单应用</a></li>
-                    <li><a href="form-wizard.html">表单验证</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="gallery.html">
-                    <i class="icon-picture"></i>
-                    <span>相册</span>
-                </a>
-            </li>
-            <li>
-                <a href="calendar.html">
-                    <i class="icon-calendar-empty"></i>
-                    <span>日历</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="tables.html">
-                    <i class="icon-th-large"></i>
-                    <span>表格</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="tables.html">常用表格</a></li>
-                    <li><a href="datatables.html">数据表格</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="dropdown-toggle ui-elements" href="#">
-                    <i class="icon-code-fork"></i>
-                    <span>UI 组件</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="ui-elements.html">UI 组件</a></li>
-                    <li><a href="icons.html">Icons图标</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="personal-info.html">
-                    <i class="icon-cog"></i>
-                    <span>我的信息</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-share-alt"></i>
-                    <span>其他</span>
-                    <i class="icon-chevron-down"></i>
-                </a>
-                <ul class="submenu">
-                    <li><a href="code-editor.html">代码编辑器</a></li>
-                    <li><a href="grids.html">网格</a></li>
-                    <li><a href="signin.html">登录</a></li>
-                    <li><a href="signup.html">注册</a></li>
-                </ul>
-            </li> -->
         </ul>
     </div>
     <!-- end sidebar -->
@@ -192,19 +109,39 @@
             <div class="row">
             	<table style="margin-bottom: 45px;margin-top: -30px;">
             		<tr>
-            			<td style="width:120px">
-            				<h4>站点编码：</h4>
+            			<td style="width:80px">
+            				<h5>站点编码：</h5>
             			</td>
-            			<td style="width:200px">
+            			<td style="width:160px">
             				<input type="text" id="zdid" class="form-control" style="width: 150px" />
             			</td>
-            			<td style="width:120px">
-            				<h4>站点名称：</h4>
+            			<td style="width:80px">
+            				<h5>站点名称：</h5>
             			</td>
-            			<td style="width:200px">
+            			<td style="width:160px">
             				<input type="text" id="ttmc" class="form-control" style="width: 150px" />
             			</td>
-            			<td style="width:80px">
+            			<td style="width:120px">
+            				<h5>维护费收支达标：</h5>
+            			</td>
+            			<td style="width:100px">
+            				<select id="upkeep" class="form-control" style="width:90px">
+            				    <option value ="">All</option>
+								<option value ="达标">达标</option>
+								<option value ="未达标">未达标</option>
+							</select>
+            			</td>
+            			<td style="width:120px">
+            				<h5>场地费收支达标：</h5>
+            			</td>
+            			<td style="width:110px">
+            				<select id="site" class="form-control" style="width:90px">
+            					<option value ="">All</option>
+								<option value ="达标">达标</option>
+								<option value ="未达标">未达标</option>
+							</select>	
+            			</td>
+            			<td style="width:100px">
             				<div class="btn-glow" onclick="resetCondition()"><i class="icon-reply"></i> 重置</div>
             			</td>
             			<td>
@@ -237,6 +174,12 @@
 								<th tabindex="0" rowspan="1" colspan="1">移动名称</th>
 								<th tabindex="0" rowspan="1" colspan="1">电信名称</th>	
 								<th tabindex="0" rowspan="1" colspan="1">联通名称</th>
+								<th tabindex="0" rowspan="1" colspan="1">维护费出账收入</th>
+								<th tabindex="0" rowspan="1" colspan="1">维护费支出计提</th>
+								<th tabindex="0" rowspan="1" colspan="1">场地费出账收入</th>
+								<th tabindex="0" rowspan="1" colspan="1">场地费支出计提</th>
+								<th tabindex="0" rowspan="1" colspan="1">维护费收支是否达标</th>
+								<th tabindex="0" rowspan="1" colspan="1">场地费收支是否达标</th>
 								<th tabindex="0" rowspan="1" colspan="1">操作</th>	
 							</tr>
 						</thead>

@@ -4,10 +4,29 @@ function makeTable(results) {
 	 for (var i = 0; i < results.length; i++) {
 		var line = "<td>" + (i + 1) + "</td>";
 		line += "<td>" + results[i].id + "</td>";
-		line += "<td>" + results[i].cntower + "</td>";
-		line += "<td>" + results[i].cnmobile + "</td>";
-		line += "<td>" + results[i].cntelecom + "</td>";
-		line += "<td>" + results[i].cnunicom + "</td>";
+		line += "<td>" + results[i].ct + "</td>";
+		if(results[i].cm==null){
+			line += "<td>" + "" + "</td>";
+		}else{
+			line += "<td>" + results[i].cm + "</td>";
+		}
+		if(results[i].cd==null){
+			line += "<td>" + "" + "</td>";
+		}else{
+			line += "<td>" + results[i].cd + "</td>";
+		}
+		if(results[i].cu==null){
+			line += "<td>" + "" + "</td>";
+		}else{
+			line += "<td>" + results[i].cu + "</td>";
+		}
+		
+		line += "<td>" + results[i].upkeepIncom + "</td>";
+		line += "<td>" + results[i].upkeepExpend + "</td>";
+		line += "<td>" + results[i].siteIncom + "</td>";
+		line += "<td>" + results[i].siteExpend + "</td>";
+		line += "<td>" + results[i].upkeepStatus + "</td>";
+		line += "<td>" + results[i].siteStatus + "</td>";
 		line += ('<td><a href="###" onclick="deleteRow('+"'"+results[i].id+"'"+')">删除</a></td>');
 		
 		detail += "<tr>" + line + "</tr>"; 
@@ -21,6 +40,8 @@ var pageSize = 10;
 function refreshPage(flag) { // 是否重置分页器标记
 	var id = $("#zdid").val().trim();
 	var ttmc = $("#ttmc").val().trim();
+	var upkeepStatus = $("#upkeep").val();
+	var siteStatus = $("#site").val();
 	$.ajax({
 		type : 'post',
 		url : '/station/list.action',
@@ -28,7 +49,9 @@ function refreshPage(flag) { // 是否重置分页器标记
 			"id" : id,
 			"ttmc" : ttmc,
 			"pageSize" : pageSize,
-			"curPage" : curPage
+			"curPage" : curPage,
+			"upkeepStatus" : upkeepStatus,
+			"siteStatus" : siteStatus
 		}),
 		dataType : "json",
 		contentType : "application/json",
@@ -92,7 +115,7 @@ function initPage(totalCount) {
 			}
 		});
 	} else {
-		$("#towerTable>tbody").append("<tr><td colspan='7'>暂无数据</td></tr>");
+		$("#towerTable>tbody").append("<tr><td colspan='13'>暂无数据</td></tr>");
 		$("#table_info").html("Showing 0 to 0 of 0 entries");
 	}
 	

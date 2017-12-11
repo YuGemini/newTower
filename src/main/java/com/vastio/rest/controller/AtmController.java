@@ -3,6 +3,7 @@ package com.vastio.rest.controller;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,7 +50,7 @@ public class AtmController {
     @ResponseBody
     public Result userList(@RequestBody SearchParam param) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("curRow", param.getPageSize() * (param.getCurPage() - 1));
+        map.put("curRow", param.getCurPage());
         map.put("pageSize", param.getPageSize());
         map.put("id", param.getId());
         map.put("ct", param.getTtmc());
@@ -66,6 +67,7 @@ public class AtmController {
     }
 
     @RequestMapping(value = "/station/deleteAll")
+    @ResponseBody
     public void deleteAll() {
         stationService.deleteAllStation();
     }
@@ -80,7 +82,6 @@ public class AtmController {
     public String importExcel(@RequestParam(value = "fileUpload") MultipartFile excelFile,
             HttpServletRequest request) throws IOException {
         InputStream fis = excelFile.getInputStream();
-
         List<Map<String, String>> data = ExcelImportUtil.parseExcel(fis);
         List<Order> orders = new ArrayList<Order>();
         List<String> siteIds = new ArrayList<String>();
@@ -115,19 +116,23 @@ public class AtmController {
         siteSet.forEach(e -> {
             StationInfo stationInfo = new StationInfo();
             stationInfo.setId(e);
+            changeStationInfo(orders, e, stationInfo);
+            stationInfos.add(stationInfo);
         });
 
         stationService.insertStations(stationInfos);
 
-        return "true";
+        return "success";
     }
 
     private void changeStationInfo(List<Order> orders, String id, StationInfo stationInfo) {
+        DecimalFormat df = new DecimalFormat("#.00");
         String ctName = "";
         Double upkeepIncom = 0.0;
         Double upkeepExpend1 = 0.0;
         Double upkeepExpend2 = 0.0;
         Double siteIncom = 0.0;
+        Double siteExpend = 0.0;
         for (Order order : orders) {
             if (order.getSiteId().equals(id)) {
                 ctName = order.getTowerName();
@@ -187,30 +192,70 @@ public class AtmController {
                     upkeepExpend2 = c;
                 }
 
+                String[] str = order.getSite().split("|");
+                if (Double.valueOf(str[0]) == 0 && Double.valueOf(str[2]) == 0) {
+                    siteIncom += 0;
+                } else {
+                    siteIncom +=
+                            (Double.valueOf(str[0]) + Double.valueOf(str[2]) / 10)
+                                    * Double.valueOf(order.getSiteDiscount());
+                }
+
+                siteExpend = Double.valueOf(order.getSiteCost());
+
             }
         }
 
         stationInfo.setCt(ctName);
-        stationInfo.setUpkeepIncom(String.valueOf(upkeepIncom / 12));
-        stationInfo.setUpkeepExpend(String.valueOf((upkeepExpend1 + upkeepExpend2) / 12));
-        if(upkeepIncom/(upkeepExpend1 + upkeepExpend2)>1.15){
+        if (upkeepIncom == 0) {
+            stationInfo.setUpkeepIncom(String.valueOf(upkeepIncom / 12));
+        } else {
+            stationInfo.setUpkeepIncom(String.valueOf(df.format(upkeepIncom / 12)));
+        }
+        if ((upkeepExpend1 + upkeepExpend2) == 0) {
+            stationInfo.setUpkeepExpend(String.valueOf((upkeepExpend1 + upkeepExpend2) / 12));
+        } else {
+            stationInfo.setUpkeepExpend(String.valueOf(df
+                    .format((upkeepExpend1 + upkeepExpend2) / 12)));
+        }
+        if (upkeepIncom / (upkeepExpend1 + upkeepExpend2) > 1.15) {
             stationInfo.setUpkeepStatus("达标");
-        }else{
+        } else {
             stationInfo.setUpkeepStatus("未达标");
         }
+        if (siteIncom == 0) {
+            stationInfo.setSiteIncom(String.valueOf(siteIncom));
+        } else {
+            stationInfo.setSiteIncom(String.valueOf(df.format(siteIncom)));
+        }
+        if (siteExpend == 0) {
+            stationInfo.setSiteExpend(String.valueOf(siteExpend));
+        } else {
+            stationInfo.setSiteExpend(String.valueOf(df.format(siteExpend)));
+        }
+
+        if (siteIncom > siteExpend) {
+            stationInfo.setSiteStatus("达标");
+        } else {
+            stationInfo.setSiteStatus("未达标");
+        }
+
     }
 
     @RequestMapping(value = "/station/export.action")
-    @ResponseBody
     public void report(@RequestParam(value = "id", required = false) String id,
-            @RequestParam(value = "ttmc", required = false) String ttmc, ModelMap model,
+            @RequestParam(value = "ttmc", required = false) String ttmc,
+            @RequestParam(value = "upkeep", required = false) String upkeep,
+            @RequestParam(value = "site", required = false) String site, ModelMap model,
             HttpServletRequest request, HttpServletResponse response)
             throws UnsupportedEncodingException {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("curRow", 0);
-        map.put("pageSize", 3000);
+        map.put("curRow", 1);
+        map.put("pageSize", 30000);
         map.put("id", id);
         map.put("ct", ttmc);
+        map.put("upkeepStatus", upkeep);
+        map.put("siteStatus", site);
         ViewExcel viewExcel = new ViewExcel();
 
         Map obj = null;
@@ -228,6 +273,12 @@ public class AtmController {
             station.put("移动名称", item.getCm());
             station.put("电信名称", item.getCd());
             station.put("联通名称", item.getCu());
+            station.put("维护费出账收入", item.getUpkeepIncom());
+            station.put("维护费支出计提", item.getUpkeepExpend());
+            station.put("场地费出账收入", item.getSiteIncom());
+            station.put("场地费支出计提", item.getSiteExpend());
+            station.put("维护费收支是否达标", item.getUpkeepStatus());
+            station.put("场地费收支是否达标", item.getSiteStatus());
             data.add(station);
 
         }
@@ -235,7 +286,6 @@ public class AtmController {
         try {
             viewExcel.buildExcelDocument(obj, workbook, request, response);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -264,7 +314,7 @@ public class AtmController {
         station.put("机房类型", "");
         station.put("[维护费原始值]", "");
         station.put("维护费共享折扣", "");
-        station.put("[场地费原始值] ", "");
+        station.put("[场地费原始值]", "");
         station.put("场地费共享折扣", "");
         station.put("维保费用", "");
         station.put("物业系统场地费数据", "");
