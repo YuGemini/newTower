@@ -1,13 +1,9 @@
 package com.vastio.rest;
 
-import java.io.IOException;
-
 import com.alibaba.druid.pool.DruidDataSource;
 import com.vastio.rest.aop.AuditLogAspect;
 
-import org.beetl.core.ResourceLoader;
 import org.beetl.core.resource.ClasspathResourceLoader;
-import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
 import org.beetl.sql.core.ClasspathLoader;

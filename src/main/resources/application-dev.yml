@@ -1,12 +1,11 @@
-server:
-  contextPath: /vastio
-  port: 8080
-
 db:
-  url: jdbc:oracle:thin:@172.16.60.174:1521:orcl
-  userName: gray
-  passowrd: Peptalk123
-  driver: oracle.jdbc.driver.OracleDriver
+  url: jdbc:mysql://localhost:3306/xj?useUnicode=true&characterEncoding=utf-8
+  userName: root
+  passowrd: 512382762
+  driver: com.mysql.jdbc.Driver
+
+custom:
+  tmpLocation: D:/image
 
 spring:
   session:

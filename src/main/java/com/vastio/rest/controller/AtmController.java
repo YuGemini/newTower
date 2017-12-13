@@ -77,10 +77,10 @@ public class AtmController {
         return "index";
     }
 
-    @RequestMapping(value = "/station/import.action")
+    @RequestMapping(value = "/station/import.action", method = RequestMethod.POST)
     @ResponseBody
-    public String importExcel(@RequestParam(value = "fileUpload") MultipartFile excelFile,
-            HttpServletRequest request) throws IOException {
+    public Map<String, Object> importExcel(@RequestParam(value = "fileUpload") MultipartFile excelFile,
+            HttpServletRequest request, HttpServletResponse response) throws IOException {
         InputStream fis = excelFile.getInputStream();
         List<Map<String, String>> data = ExcelImportUtil.parseExcel(fis);
         List<Order> orders = new ArrayList<Order>();
@@ -121,8 +121,9 @@ public class AtmController {
         });
 
         stationService.insertStations(stationInfos);
-
-        return "success";
+        Map<String, Object> result = new HashMap<String, Object>();
+        result.put("msg", "成功");
+        return result;
     }
 
     private void changeStationInfo(List<Order> orders, String id, StationInfo stationInfo) {
@@ -284,7 +285,7 @@ public class AtmController {
         }
         XSSFWorkbook workbook = ExcelExportUtil.generateExcel(data, "站点信息表");
         try {
-            viewExcel.buildExcelDocument(obj, workbook, request, response);
+            viewExcel.buildExcelDocument2(obj, workbook, request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

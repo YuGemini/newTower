@@ -5,11 +5,10 @@ $("#fileUpload").fileinput({
         		allowedPreviewTypes: ['image'],
         		allowedFileExtensions:  ['xls','xlsx'],
         		maxFilePreviewSize: 10240
-    		}).on("fileuploaded", function(event, data) {
-    			alert(data);
-    			var data = $.parseJSON(data); 
-    	        if(data=='success')
+    		}).on("fileuploaded", function(event, data, previewId, index) {
+    			var res = data.response;
+    	        if(res.msg=='成功')
     	        {
-    	            alert('处理成功');
+    	        	document.location = "towerlist";
     	        }
     	    });

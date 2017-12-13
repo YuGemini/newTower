@@ -124,7 +124,9 @@ function initPage(totalCount) {
 function filedownload(){
 	var zdid = $("#zdid").val();
 	var ttmc = $("#ttmc").val();  
-    location.href = "/station/export.action?id=" + zdid + "&ttmc=" + ttmc;
+	var upkeepStatus = $("#upkeep").val();
+	var siteStatus = $("#site").val();
+    location.href = "/station/export.action?id=" + zdid + "&ttmc=" + ttmc+ "&upkeep=" + upkeepStatus+ "&site=" + siteStatus;
  }
 
 function deleteAll() { 
