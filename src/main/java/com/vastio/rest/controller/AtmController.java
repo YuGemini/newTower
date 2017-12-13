@@ -79,7 +79,8 @@ public class AtmController {
 
     @RequestMapping(value = "/station/import.action", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> importExcel(@RequestParam(value = "fileUpload") MultipartFile excelFile,
+    public Map<String, Object> importExcel(
+            @RequestParam(value = "fileUpload") MultipartFile excelFile,
             HttpServletRequest request, HttpServletResponse response) throws IOException {
         InputStream fis = excelFile.getInputStream();
         List<Map<String, String>> data = ExcelImportUtil.parseExcel(fis);
