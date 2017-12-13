@@ -5,6 +5,8 @@ import java.io.IOException;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.vastio.rest.aop.AuditLogAspect;
 
+import org.beetl.core.ResourceLoader;
+import org.beetl.core.resource.ClasspathResourceLoader;
 import org.beetl.core.resource.WebAppResourceLoader;
 import org.beetl.ext.spring.BeetlGroupUtilConfiguration;
 import org.beetl.ext.spring.BeetlSpringViewResolver;
@@ -92,13 +94,17 @@ public class MainInitializer extends SpringBootServletInitializer {
     public BeetlGroupUtilConfiguration getBeetlGroupUtilConfiguration() {
         BeetlGroupUtilConfiguration beetlGroupUtilConfiguration = new BeetlGroupUtilConfiguration();
         ResourcePatternResolver patternResolver = ResourcePatternUtils.getResourcePatternResolver(new DefaultResourceLoader());
-        try {
-            // WebAppResourceLoader 配置root路径是关键
-            WebAppResourceLoader webAppResourceLoader = new WebAppResourceLoader(patternResolver.getResource("classpath:/templates").getFile().getPath());
-            beetlGroupUtilConfiguration.setResourceLoader(webAppResourceLoader);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // WebAppResourceLoader 配置root路径是关键
+//            WebAppResourceLoader webAppResourceLoader = new WebAppResourceLoader(patternResolver.getResource("classpath:templates").getFile().getPath());
+//            beetlGroupUtilConfiguration.setResourceLoader(webAppResourceLoader);
+//            String root =  patternResolver.getResource("classpath:templates").getFile().toString();
+//            WebAppResourceLoader webAppResourceLoader = new WebAppResourceLoader(root);
+//            beetlGroupUtilConfiguration.setResourceLoader(webAppResourceLoader);
+//            beetlGroupUtilConfiguration.setConfigFileResource(patternResolver.getResource("classpath:beetl.properties"));
+        ClasspathResourceLoader cploder = new ClasspathResourceLoader("/templates");
+        beetlGroupUtilConfiguration.setResourceLoader(cploder);
+
+        beetlGroupUtilConfiguration.setConfigFileResource(patternResolver.getResource("classpath:beetl.properties"));
         //读取配置文件信息
         return beetlGroupUtilConfiguration;
     }
