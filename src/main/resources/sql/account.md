@@ -1,3 +1,3 @@
 findUserByName
 ===
-	select * from LoginUser where username=#name#
+	select * from loginuser where username=#name#

@@ -193,14 +193,19 @@ public class AtmController {
                 if (c > upkeepExpend2) {
                     upkeepExpend2 = c;
                 }
-
-                String[] str = order.getSite().split("|");
+                String[] str = order.getSite().split("\\|");
                 if (Double.valueOf(str[0]) == 0 && Double.valueOf(str[2]) == 0) {
                     siteIncom += 0;
                 } else {
-                    siteIncom +=
-                            (Double.valueOf(str[0]) + Double.valueOf(str[2]) / 10)
-                                    * Double.valueOf(order.getSiteDiscount());
+                    try {
+                        siteIncom +=
+                                (Double.valueOf(str[0]) + Double.valueOf(str[2]) / 10)
+                                        * Double.valueOf(order.getSiteDiscount());
+                    } catch (Exception e) {
+                        System.out.println(order.getSite());
+                        System.out.println(str[0] + "," + str[1] + "," + str[2]);
+                        throw e;
+                    }
                 }
 
                 siteExpend = Double.valueOf(order.getSiteCost());

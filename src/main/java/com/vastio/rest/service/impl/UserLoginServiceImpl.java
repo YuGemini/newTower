@@ -21,8 +21,11 @@ public class UserLoginServiceImpl implements UserLoginService {
     public UserLogin findUser(String name) {
         Map<String, Object> paras = new HashMap<String, Object>();
         paras.put("name", name);
-        UserLogin user = sqlManager.selectSingle("account.findUserByName", paras, UserLogin.class);
-        return user;
+        // UserLogin user = sqlManager.selectSingle("account.findUserByName", paras,
+        // UserLogin.class);
+        UserLogin user = new UserLogin();
+        user.setUsername(name);
+        return sqlManager.templateOne(user);
     }
 
     @Override

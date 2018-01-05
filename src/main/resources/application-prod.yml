@@ -12,3 +12,9 @@ spring:
     store-type: HASH_MAP
   cache:
     type: None
+  redis:
+    host: 127.0.0.1
+    password: cxy910527
+    port: 6379
+    pool:
+      max-active: 8

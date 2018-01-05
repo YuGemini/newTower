@@ -46,8 +46,8 @@ public class ExcelImportUtil {
                         cell.setCellType(XSSFCell.CELL_TYPE_STRING);
                     }
                     String val = cell.getStringCellValue();
-                    if (val == null) {
-                        val = "";
+                    if (val == null || val.equals("")) {
+                        val = "0";
                     }
                     // System.out.println(val);
 

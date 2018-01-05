@@ -94,7 +94,9 @@ function deleteRow(row) {
 
 function resetCondition(){
 	$("#zdid").val(""); 
-	$("#ttmc").val(""); 
+	$("#ttmc").val("");
+	$("#upkeep").val("");
+	$("#site").val("");
 }
 
 function initPage(totalCount) {
